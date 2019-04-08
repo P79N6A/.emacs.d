@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+org.eclipse.core.net.hasMigrated=true
+proxyData/HTTP/hasAuth=false
+proxyData/HTTP/host=dev-proxy.oa.com
+proxyData/HTTP/port=8080
