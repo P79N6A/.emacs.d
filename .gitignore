@@ -38,6 +38,10 @@
 /scratch
 /smex-items
 /tramp
+javalibs/jdt/config_mac/org.eclipse.core.runtime/
+javalibs/jdt/config_mac/org.eclipse.equinox.app/
+javalibs/jdt/config_mac/org.eclipse.equinox.launcher/
+javalibs/jdt/config_mac/org.eclipse.osgi/
 anaconda-mode/
 auto-save-list/
 cnfonts/
