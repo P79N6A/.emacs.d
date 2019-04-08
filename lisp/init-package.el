@@ -65,7 +65,7 @@
              `(,(cons "gnu"   (concat proto "://elpa.emacs-china.org/gnu/"))
                ,(cons "elpa" (concat proto "://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
                ,(cons "marmalade" (concat proto "://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/"))
-               ,(cons "melpa" (concat proto "://melpa.org/packages/"))
+               ;;,(cons "melpa" (concat proto "://melpa.org/packages/"))
                ,(cons "melpa" (concat proto "://elpa.emacs-china.org/melpa/"))))
             ('netease
              `(,(cons "gnu"   (concat proto "://mirrors.163.com/elpa/gnu/"))
