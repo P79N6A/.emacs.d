@@ -19,19 +19,19 @@
 (setq tabbar-separator '(2.0))
 (set-face-attribute
  'tabbar-default nil
- :background "brightblack"
+ :background "black"
  :foreground "white"
  )
 (set-face-attribute
  'tabbar-selected nil
  :background "#ff5f00"
- :foreground "brightwhite"
+ :foreground "white"
  :box nil
  )
 (set-face-attribute
  'tabbar-modified nil
- :background "brightred"
- :foreground "brightwhite"
+ :background "red"
+ :foreground "white"
  :box nil
  )
 
