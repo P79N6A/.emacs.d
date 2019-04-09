@@ -53,7 +53,9 @@
   (setq package-archives
         (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                             (not (gnutls-available-p))))
-               (proto (if no-ssl "http" "https")))
+               ;;(proto (if no-ssl "http" "https"))
+               (proto "http")
+               )
           (pcase archives
             ('melpa
              `(,(cons "gnu"   (concat proto "://elpa.gnu.org/packages/"))

@@ -44,8 +44,8 @@
 ;; go get -u github.com/fatih/gomodifytags
 ;; go get -u github.com/davidrjenni/reftools/cmd/fillstruct
 
-(eval-when-compile
-  (require 'init-custom))
+;; (eval-when-compile
+;;   (require 'init-custom))
 
 ;; (use-package lsp-go
 ;;   :after (lsp-mode go-mode)
@@ -55,72 +55,91 @@
 ;;                                           "-lint-tool=golint"))
 ;;   :hook (go-mode . lsp-go-enable)
 ;;   :commands lsp-go-enable)
-(add-hook 'go-mode-hook #'lsp)
 ;; Golang
-(use-package go-mode
-  :bind (:map go-mode-map
-              ([remap xref-find-definitions] . godef-jump)
-              ("C-c R" . go-remove-unused-imports)
-              ("<f1>" . godoc-at-point))
-  :config
-  (use-package go-dlv)
-  (use-package go-fill-struct)
-  (use-package go-impl)
-  (use-package go-rename)
-  (use-package golint)
-  (use-package govet)
+;; (use-package go-mode
+;;   :bind (:map go-mode-map
+;;               ([remap xref-find-definitions] . godef-jump)
+;;               ("C-c R" . go-remove-unused-imports)
+;;               ("<f1>" . godoc-at-point))
+;;   :config
+;;   (use-package go-dlv)
+;;   (use-package go-fill-struct)
+;;   (use-package go-impl)
+;;   (use-package go-rename)
+;;   (use-package golint)
+  ;;   (use-package govet)
 
-  (use-package go-tag
-    :bind (:map go-mode-map
-                ("C-c t" . go-tag-add)
-                ("C-c T" . go-tag-remove))
-    :config (setq go-tag-args (list "-transform" "camelcase")))
+  ;;   (use-package go-tag
+  ;;     :bind (:map go-mode-map
+  ;;                 ("C-c t" . go-tag-add)
+  ;;                 ("C-c T" . go-tag-remove))
+  ;;     :config (setq go-tag-args (list "-transform" "camelcase")))
 
-  (use-package gotest
-    :bind (:map go-mode-map
-                ("C-c a" . go-test-current-project)
-                ("C-c m" . go-test-current-file)
-                ("C-c ." . go-test-current-test)
-                ("C-c x" . go-run)))
+  ;;   (use-package gotest
+  ;;     :bind (:map go-mode-map
+  ;;                 ("C-c a" . go-test-current-project)
+  ;;                 ("C-c m" . go-test-current-file)
+  ;;                 ("C-c ." . go-test-current-test)
+  ;;                 ("C-c x" . go-run)))
 
-  (use-package go-gen-test
-    :bind (:map go-mode-map
-                ("C-c C-t" . go-gen-test-dwim)))
+  ;;   (use-package go-gen-test
+  ;;     :bind (:map go-mode-map
+  ;;                 ("C-c C-t" . go-gen-test-dwim)))
 
-  ;; LSP provides the functionalities.
-  ;; NOTE: `go-langserver' doesn't support Windows so far.
-  (unless centaur-lsp
-    ;; `goimports' or `gofmt'
-    (setq gofmt-command "goimports")
-    (add-hook 'before-save-hook #'gofmt-before-save)
+  ;;   ;; LSP provides the functionalities.
+  ;;   ;; NOTE: `go-langserver' doesn't support Windows so far.
+  ;;   (unless centaur-lsp
+  ;;     ;; `goimports' or `gofmt'
+  ;;     (setq gofmt-command "goimports")
+  ;;     (add-hook 'before-save-hook #'gofmt-before-save)
 
-    ;; Go add-ons for Projectile
-    ;; Run: M-x `go-projectile-install-tools'
-    (with-eval-after-load 'projectile
-      (use-package go-projectile
-        :commands (go-projectile-mode go-projectile-switch-project)
-        :hook ((go-mode . go-projectile-mode)
-               (projectile-after-switch-project . go-projectile-switch-project))))
+  ;;     ;; Go add-ons for Projectile
+  ;;     ;; Run: M-x `go-projectile-install-tools'
+  ;;     (with-eval-after-load 'projectile
+  ;;       (use-package go-projectile
+  ;;         :commands (go-projectile-mode go-projectile-switch-project)
+  ;;         :hook ((go-mode . go-projectile-mode)
+  ;;                (projectile-after-switch-project . go-projectile-switch-project))))
 
-    (use-package go-eldoc
-      :hook (go-mode . go-eldoc-setup))
+  ;;     (use-package go-eldoc
+  ;;       :hook (go-mode . go-eldoc-setup))
 
-    (use-package go-guru
-      :bind (:map go-mode-map
-                  ;; ([remap xref-find-definitions] . go-guru-definition)
-                  ([remap xref-find-references] . go-guru-referrers)))
+  ;;     (use-package go-guru
+  ;;       :bind (:map go-mode-map
+  ;;                   ;; ([remap xref-find-definitions] . go-guru-definition)
+  ;;                   ([remap xref-find-references] . go-guru-referrers)))
 
-    (with-eval-after-load 'company
-      (use-package company-go
-        :defines company-backends
-        :init (cl-pushnew 'company-go company-backends)))))
+  ;;     (with-eval-after-load 'company
+  ;;       (use-package company-go
+  ;;         :defines company-backends
+  ;;         :init (cl-pushnew 'company-go company-backends)))))
 
-;; Local Golang playground for short snippes
-(use-package go-playground
-  :diminish go-playground-mode
-  :commands go-playground-mode)
+  ;; ;; Local Golang playground for short snippes
+  ;; (use-package go-playground
+  ;;   :diminish go-playground-mode
+  ;;   :commands go-playground-mode)
 
-(provide 'init-go)
+  (use-package go-mode
+    :mode "\\.go\\'"
+    :config
+    (add-hook 'before-save-hook 'gofmt-before-save nil 'local)
+
+    (add-hook 'go-mode-hook
+              (lambda ()
+                (use-package flycheck-golangci-lint)
+
+                (use-package company-go
+                  :after company go-mode
+                  :config
+                  (setq-local company-backends '(company-go)))
+
+                (use-package lsp-go
+                  :config (lsp-go-enable))
+
+                (use-package go-projectile
+                  :after projectile))))
+
+  (provide 'init-go)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-go.el ends here

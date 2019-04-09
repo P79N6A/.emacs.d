@@ -28,42 +28,42 @@
 (global-set-key (kbd "M-h") 'hs-toggle-hiding)
 
 
-(defhydra hydra-pinky (:color pink :hint nil :exit t)
-  "
-^Move^             ^Unmark^           ^Actions^          ^Search
-^^^^^^^^-----------------------------------------------------------------
-_n_: next-line
-_p_: previous-line
-_f_: forward-char
-_b_: backward-char
-_v_: scroll-up-command
-_V_: scroll-down-command
-"
-  ("n" next-line)
-  ("p" previous-line)
-  ("f" forward-char)
-  ("b" backward-char)
-  ("a" beginning-of-line)
-  ("e" move-end-of-line)
-  ("v" scroll-up-command)
-  ("V" scroll-down-command)
-  ("g" keyboard-quit)
-  ("j" git-gutter:next-hunk)
-  ("k" git-gutter:previous-hunk)
-  ("o" other-window-or-split)
-  ("l" recenter-top-bottom)
-  ("s" save-buffer)
-  ("S" window-swap-states)
-  ("q" kill-buffer)
-  ("<" beginning-of-buffer)
-  (">" end-of-buffer)
-  ("SPC" set-mark-command)
-  ("1" delete-other-windows)
-  ("2" split-window-below)
-  ("3" split-window-right)
-  ("0" delete-window)
-  ("x" delete-window))
+;; (defhydra hydra-pinky (:color pink :hint nil :exit t)
+;;   "
+;; ^Move^             ^Unmark^           ^Actions^          ^Search
+;; ^^^^^^^^-----------------------------------------------------------------
+;; _n_: next-line
+;; _p_: previous-line
+;; _f_: forward-char
+;; _b_: backward-char
+;; _v_: scroll-up-command
+;; _V_: scroll-down-command
+;; "
+;;   ("n" next-line)
+;;   ("p" previous-line)
+;;   ("f" forward-char)
+;;   ("b" backward-char)
+;;   ("a" beginning-of-line)
+;;   ("e" move-end-of-line)
+;;   ("v" scroll-up-command)
+;;   ("V" scroll-down-command)
+;;   ("g" keyboard-quit)
+;;   ("j" git-gutter:next-hunk)
+;;   ("k" git-gutter:previous-hunk)
+;;   ("o" other-window-or-split)
+;;   ("l" recenter-top-bottom)
+;;   ("s" save-buffer)
+;;   ("S" window-swap-states)
+;;   ("q" kill-buffer)
+;;   ("<" beginning-of-buffer)
+;;   (">" end-of-buffer)
+;;   ("SPC" set-mark-command)
+;;   ("1" delete-other-windows)
+;;   ("2" split-window-below)
+;;   ("3" split-window-right)
+;;   ("0" delete-window)
+;;   ("x" delete-window))
 
-;; key-chord
-(bind-key "C-'" 'hydra-pinky/body)
+;; ;; key-chord
+;; (bind-key "C-'" 'hydra-pinky/body)
 (provide 'init-keybinds)

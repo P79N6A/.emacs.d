@@ -57,6 +57,11 @@
     (setq exec-path-from-shell-arguments '("-l"))
     (exec-path-from-shell-initialize)))
 
+(use-package which-key
+  :delight
+  :bind (("C-h b" . which-key-show-top-level)
+         ("C-h m" . which-key-show-major-mode)))
+
 ;; Start server
 (use-package server
   :ensure nil

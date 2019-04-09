@@ -33,6 +33,7 @@
         lsp-ui-sideline-update-mode 'point))
 
 (setq lsp-java-server-install-dir "~/.emacs.d/javalibs/jdt")
+(setq lsp-java-vmargs '("-noverify" "-Xmx2G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication"))
 (use-package lsp-java
   :ensure t
   :after lsp

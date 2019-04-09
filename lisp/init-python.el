@@ -86,23 +86,7 @@
   (with-eval-after-load 'ido
     (defalias 'ido-completing-read 'completing-read)))
 
-(add-hook 'python-mode-hook (lambda()
-                              (progn
-                                (elpy-enable)
-                                (elpy-mode t)
-                                (lsp-python t)
-                                (setq tab-width 4)
-                                (local-set-key (kbd "M-b") 'elpy-autopep8-fix-code)
-                                (local-set-key (kbd "C-p") 'ace-jump-mode)
-                                (local-set-key (kbd "M-p") 'helm-swoop)
-                                (local-set-key (kbd "C-F") 'elpy-format-code)
-                                (setq auto-complete-mode nil)
-                                (local-set-key (kbd "C-O") 'elpy-importmagic-fixup)
-                                'jedi:setup)))
-(setq jedi:complete-on-dot t)
-                                        ;(setq python-shell-interpreter "C:/Python27/python.exe")
-(setq python-shell-prompt-detect-failure-warning nil)
-(set-variable 'python-indent-guess-indent-offset nil)
+
 (provide 'init-python)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

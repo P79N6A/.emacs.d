@@ -21,6 +21,20 @@
 (setq user-full-name "liubangchen")
 (setq user-mail-address "liubangchen@tencent.com")
 (setq default-directory "~/")
+(prefer-coding-system 'utf-8)
+
+(unless (boundp 'confirm-kill-processes) ;; new on Emacs 26
+  (advice-add 'save-buffers-kill-emacs :before
+              (lambda (&rest _)
+                (defun processes-with-query (process)
+                  (and (memq (process-status process) '(run stop open listen))
+                       (process-query-on-exit-flag process)))
+                (let ((processes (seq-filter 'processes-with-query (process-list))))
+                  (dolist (process processes)
+                    (set-process-query-on-exit-flag process nil)))))
+  (setq kill-buffer-query-functions
+        (remq 'process-kill-buffer-query-function kill-buffer-query-functions)))
+
 
 ;; paste and copy
 (defun copy-from-osx ()

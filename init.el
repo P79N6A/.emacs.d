@@ -34,7 +34,7 @@
 
 (when (version< emacs-version "25.1")
   (error "This requires Emacs 25.1 and above!"))
-
+(setq user-emacs-directory "~/.emacs.d")
 ;; Speed up startup
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
@@ -55,13 +55,13 @@
 ;; Optimize: Force "lisp"" and "site-lisp" at the head to reduce the startup time.
 (defun update-load-path (&rest _)
   "Update `load-path'."
-  (push (expand-file-name "site-lisp" user-emacs-directory) load-path)
-  (push (expand-file-name "lisp" user-emacs-directory) load-path))
+  (push (expand-file-name "site-lisp" "~/.emacs.d") load-path)
+  (push (expand-file-name "lisp" "~/.emacs.d") load-path))
 
 (defun add-subdirs-to-load-path (&rest _)
   "Add subdirectories to `load-path'."
   (let ((default-directory
-          (expand-file-name "site-lisp" user-emacs-directory)))
+          (expand-file-name "site-lisp" "~/.emacs.d")))
     (normal-top-level-add-subdirs-to-load-path)))
 
 (advice-add #'package-initialize :after #'update-load-path)
